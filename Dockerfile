@@ -7,7 +7,7 @@ FROM php:8.2-apache
 # ca-certificates: TiDB Cloud requires TLS; its certificates are issued by
 # Let's Encrypt, which is in the Debian CA bundle.
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    ca-certificates unzip libpng-dev libjpeg-dev libfreetype6-dev libzip-dev \
+    ca-certificates unzip libpng-dev libjpeg-dev libfreetype6-dev libzip-dev libonig-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j"$(nproc)" pdo_mysql mysqli gd mbstring xml curl zip \
     && a2enmod rewrite \
