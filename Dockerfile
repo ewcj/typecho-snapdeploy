@@ -25,6 +25,10 @@ RUN unzip -q /tmp/typecho.zip -d /tmp/typecho-src \
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
 RUN chmod +x /usr/local/bin/entrypoint.sh
 
+# Health endpoint for SnapDeploy: Typecho answers 503 on / before installation,
+# so the platform's readiness check never passes; this static file answers 200.
+COPY health /var/www/html/health
+
 EXPOSE 80
 ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 CMD ["apache2-foreground"]
